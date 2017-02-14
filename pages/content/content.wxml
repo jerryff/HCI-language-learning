@@ -1,0 +1,16 @@
+<view class="view-request-fail" wx:if="{{request_fail}}">
+    <text class="text-request-fail">网络或服务器错误，请检查网络...</text>
+</view>
+<view class="main">
+    <view class="head">
+        <image class="img" mode="aspectFill" src="{{image_url}}"/>
+        <view class="title-view">
+            <text class="title">{{word}}</text>
+        </view>
+    </view>
+    <view class="text">
+        <text class="title-keywords">释义</text>
+        <view class="line" />
+        <text class="detail" style="font-size:20px">{{message}}</text>
+    </view>
+</view>

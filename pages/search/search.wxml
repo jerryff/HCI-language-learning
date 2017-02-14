@@ -1,0 +1,17 @@
+<view class="main">
+    <view class="view-search">
+        <input class="input" placeholder-class="input-placeholder" placeholder="Search" bindinput="bindSearchInput" />
+        <image class="button" src="../../res/img/search.png" bindtap="tapSearch" />
+    </view>
+    <view class="request_null" >
+        <text hidden="{{nullHidden}}">没有搜索结果，搜索“红烧肉”试试？</text>
+    </view>
+    <loading hidden="{{loadingHidden}}">{{lodingInfo}}</loading>
+    <navigator wx:for="{{hint}}" url="{{url}}?word={{item}}">
+        <view class="main">
+            <view class="text">
+                <text i class="title">{{item}}</text>
+            </view>
+        </view>
+    </navigator>
+</view>
