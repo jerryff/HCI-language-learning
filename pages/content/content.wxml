@@ -3,7 +3,7 @@
 </view>
 <view class="main">
     <view class="head">
-        <image class="img" mode="aspectFill" src="{{image_url}}"/>
+        <image class="img" mode="aspectFit" src="{{image_url}}"/>
         <view class="title-view">
             <text class="title">{{word}}</text>
         </view>
