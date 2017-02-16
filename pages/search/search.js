@@ -13,14 +13,14 @@ Page({
         this.setData({
             input_value: e.detail.value
         })
-        var middle;
+        var middle=0;
         var low=0;
         var high=2859;
         while(low<=high)
         {
             middle=Math.floor((low+high)/2);
-            if(e.detail.value.localeCompare(this.data.word[middle])==0)  break;
-            else if(e.detail.value.localeCompare(this.data.word[middle])<0) 
+            if(this.compare(e.detail.value,this.data.word[middle])==0)  break;
+            else if(this.compare(e.detail.value,this.data.word[middle])<0) 
                     high=middle-1;
             else 
                     low=middle+1;	
@@ -30,51 +30,23 @@ Page({
         {
             hint1.push(this.data.word[middle+i]);
         }
+        console.log(hint1);
         this.setData({
             hint: hint1
         })
     },
-    tapSearch: function(event) {
-        if (this.data.input_value == null || this.data.input_value.length == 0) {
-            return;
+    compare: function(a,b){
+        if(a==b) return 0;
+        var l1=a.length;
+        var l2=b.length;
+        var i=0;
+        while(true){
+            if(i==l1) return -1;
+            if(i==l2) return 1;
+            if(a[i]>b[i]) return 1;
+            if(a[i]<b[i]) return -1; 
+            i++;
         }
-        var that = this;
-        this.setData({
-            loadingHidden: false,
-            nullHidden: true,
-            lodingInfo: "正在搜索"
-        })
-        wx.request({
-            url: app.globalData.globalUrl + "name",
-            data: {
-                name: that.data.input_value,
-            },
-            success: function(res) {
-                if (res.data.tngou.length == 0) {
-                    that.setData({
-                        nullHidden: false,
-                    })
-                } else {
-                    console.log(res.data.tngou);
-                    app.globalData.result = res.data.tngou
-                    wx.navigateTo({
-                        url: "../../pages/result/result"
-                    });
-                }
-            },
-            fail: function(error) {
-                console.log(error);
-                that.setData({
-                    lodingInfo: "搜索失败，请检查您的网络",
-                    request_fail: true,
-                });
-            },
-            complete: function() {
-                that.setData({
-                    loadingHidden: true
-                })
-            }
-        })
     },
     onHide: function() {
         this.setData({
